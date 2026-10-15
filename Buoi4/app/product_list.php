@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/common/auth.php';
+requireLogin();
 require_once 'common/dbConnect.php';
 require_once 'model/product.php';
 include 'view/header.php';
@@ -22,6 +24,15 @@ $products = getAllProducts();
     <!-- Hiển thị thông báo nếu ID không tồn tại -->
     <?php if (isset($_GET['msg']) && $_GET['msg'] == 'not_found'): ?>
         <div class="alert alert-danger">Sản phẩm không tồn tại hoặc đã bị xóa.</div>
+    <?php endif; ?>
+    <?php if (isset($_GET['msg']) && $_GET['msg'] == 'invalid_id'): ?>
+        <div class="alert alert-danger">ID sản phẩm không hợp lệ.</div>
+    <?php endif; ?>
+    <?php if (isset($_GET['msg']) && $_GET['msg'] == 'delete_failed'): ?>
+        <div class="alert alert-danger">Không thể xóa sản phẩm.</div>
+    <?php endif; ?>
+    <?php if (isset($_GET['msg']) && $_GET['msg'] == 'invalid_confirmation'): ?>
+        <div class="alert alert-danger">Yêu cầu xác nhận xóa không hợp lệ. Vui lòng thử lại.</div>
     <?php endif; ?>
 
     <table class="table table-bordered">

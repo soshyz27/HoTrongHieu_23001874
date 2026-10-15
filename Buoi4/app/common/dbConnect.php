@@ -1,6 +1,6 @@
 <?php
 $host = '127.0.0.1';
-$port = '3307'; // Chỉ định chính xác cổng 3307 như hình phpMyAdmin
+$port = '3307'; // Đổi thành cổng MySQL đang dùng nếu khác.
 $dbname = 'shopping_cart';
 $username = 'root';
 $password = ''; // Nếu MySQL của bạn có mật khẩu thì điền vào đây
@@ -12,6 +12,8 @@ try {
     // Thiết lập chế độ báo lỗi để nếu kết nối sai cổng sẽ báo ngay
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    die("Lỗi kết nối CSDL: " . $e->getMessage());
+    error_log('Database connection failed: ' . $e->getMessage());
+    http_response_code(500);
+    exit('Không thể kết nối cơ sở dữ liệu. Vui lòng kiểm tra cấu hình MySQL.');
 }
 ?>

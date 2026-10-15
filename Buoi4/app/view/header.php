@@ -77,14 +77,37 @@
             border-radius: 4px;
             margin-bottom: 15px;
         }
+        .auth-card { max-width: 560px; }
+        .form-control { display: block; width: 100%; max-width: 460px; padding: 8px; margin-top: 5px; box-sizing: border-box; }
+        .mb-3 { margin-bottom: 15px; }
+        .alert { padding: 10px 14px; margin: 12px 0; border-radius: 4px; }
+        .alert-danger { color: #842029; background: #f8d7da; }
+        .alert-success { color: #0f5132; background: #d1e7dd; }
+        .alert-warning { color: #664d03; background: #fff3cd; padding: 14px; }
+        .d-flex { display: flex; gap: 10px; }
+        .justify-content-between { justify-content: space-between; }
+        .align-items-center { align-items: center; }
+        .gap-2 { gap: 8px; }
+        .mt-4 { margin-top: 24px; }
+        .mb-3 { margin-bottom: 16px; }
+        .btn-success { background: #198754; color: white; }
+        .btn-sm { padding: 4px 8px; font-size: 0.875rem; }
+        @media (max-width: 640px) { .d-flex { flex-wrap: wrap; } table { font-size: 14px; } th, td { padding: 6px; } }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Quản Lý Sản Phẩm</h1>
         <nav>
-            <a href="product_list.php">Danh sách sản phẩm</a> | 
-            <a href="product_add.php">Thêm sản phẩm</a>
+            <?php if (isset($_SESSION['username'])): ?>
+                <a href="product_list.php">Danh sách sản phẩm</a>
+                <a href="product_add.php">Thêm sản phẩm</a>
+                <span>Xin chào, <?= htmlspecialchars($_SESSION['username'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></span>
+                <a href="logout.php">Đăng xuất</a>
+            <?php else: ?>
+                <a href="login.php">Đăng nhập</a>
+                <a href="register.php">Đăng ký</a>
+            <?php endif; ?>
         </nav>
     </div>
     <div class="content">

@@ -7,15 +7,36 @@
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
+CREATE DATABASE IF NOT EXISTS `shopping_cart` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+USE `shopping_cart`;
+
+CREATE TABLE IF NOT EXISTS `users` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `username` varchar(50) NOT NULL,
+    `password` varchar(255) NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uq_users_username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Tài khoản mẫu: demo / password. Giá trị dưới đây là bcrypt hash.
+INSERT IGNORE INTO `users` (`username`, `password`) VALUES
+('demo', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+
 START TRANSACTION;
+
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */
+;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */
+;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */
+;
+/*!40101 SET NAMES utf8mb4 */
+;
 
 --
 -- Database: `shopping_cart`
@@ -28,22 +49,53 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `products` (
-  `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `price` decimal(10,2) NOT NULL,
-  `quantity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+    `id` int(11) NOT NULL,
+    `name` varchar(100) NOT NULL,
+    `price` decimal(10, 2) NOT NULL,
+    `quantity` int(11) NOT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_unicode_ci;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `price`, `quantity`) VALUES
-(1, 'Laptop Dell Inspiron', 16000000.00, 10),
-(2, 'Chuột không dây Logitech', 350000.00, 50),
-(3, 'Bàn phím cơ Gaming', 1200000.00, 25),
-(4, 'Tai nghe Bluetooth', 800000.00, 20),
-(6, 'Asus TUF Gaming', 19500000.00, 5);
+INSERT INTO
+    `products` (
+        `id`,
+        `name`,
+        `price`,
+        `quantity`
+    )
+VALUES (
+        1,
+        'Laptop Dell Inspiron',
+        16000000.00,
+        10
+    ),
+    (
+        2,
+        'Chuột không dây Logitech',
+        350000.00,
+        50
+    ),
+    (
+        3,
+        'Bàn phím cơ Gaming',
+        1200000.00,
+        25
+    ),
+    (
+        4,
+        'Tai nghe Bluetooth',
+        800000.00,
+        20
+    ),
+    (
+        6,
+        'Asus TUF Gaming',
+        19500000.00,
+        5
+    );
 
 --
 -- Indexes for dumped tables
@@ -52,8 +104,7 @@ INSERT INTO `products` (`id`, `name`, `price`, `quantity`) VALUES
 --
 -- Indexes for table `products`
 --
-ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `products` ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -63,9 +114,14 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,
+AUTO_INCREMENT = 7;
+
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */
+;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */
+;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */
+;
